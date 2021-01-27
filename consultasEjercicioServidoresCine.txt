@@ -58,7 +58,7 @@ group by PAS.codpase, codsala
 
 /*8. Mostrar un listado con la información de todas las películas proyectadas
 en salas de más de 100 asientos y con una venta de entradas de al menos el 
-50% del total del aforo de la sala. */
+50% del total del aforo de la sala. 
 
 select * from SALAS where numfilas * numasiporfilas > 100
 and
@@ -71,4 +71,4 @@ FROM
 SALAS SAL
 WHERE SAL.codsala = subtabla.codsala) subtabla1
 WHERE aforo > aforoTotal / 2)
-
+*/
