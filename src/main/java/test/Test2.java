@@ -1,6 +1,5 @@
 package test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,12 +10,10 @@ import javax.persistence.TypedQuery;
 import JPAControladorDao.PasFacade;
 import JPAControladorDao.PasFacadeImpl;
 import entidades.Pelicula;
-import entidades.Sala;
 
 public class Test2 {
 
 	public static void main(String[] args) {
-		PasFacade pases = new PasFacadeImpl();
 
 		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Persistencia");
 		EntityManager emanager = emfactory.createEntityManager();
@@ -36,14 +33,15 @@ public class Test2 {
 //		List<String> resultList = query.getResultList();
 //		System.out.println(Arrays.toString(resultList.toArray()));
 
-		
-		/*2. Mostrar los campos título, codpelicula, cantidad de pases y recaudación de todas las películas.
-
-		select PEL.titulo, PEL.codpelicula, count(PAS.codpase) "número de pases", SUM(ENT.pvp) "precio"
-		from PASES PAS, PELICULAS PEL, ENTRADAS ENT
-		where PAS.codpelicula = PEL.codpelicula
-		and ENT.codpase = PAS.codpase
-		group by PAS.codpase*/
+		/*
+		 * 2. Mostrar los campos título, codpelicula, cantidad de pases y recaudación de
+		 * todas las películas.
+		 * 
+		 * select PEL.titulo, PEL.codpelicula, count(PAS.codpase) "número de pases",
+		 * SUM(ENT.pvp) "precio" from PASES PAS, PELICULAS PEL, ENTRADAS ENT where
+		 * PAS.codpelicula = PEL.codpelicula and ENT.codpase = PAS.codpase group by
+		 * PAS.codpase
+		 */
 
 //		System.out.println("*******************");
 //		System.out.println("*** Ejercicio 2 ***");
@@ -62,19 +60,17 @@ public class Test2 {
 //					+ ", Número de pases" +  obj[2] + ", Recaudación: " + obj[3]);
 //		}
 
-		
 		/*
-		4. Obtener la información de todos las salas de cine en las que se haya proyectado alguna película de
-		género TERROR o COMEDIA y cuya fecha de producción haya sido posterior a 2008. El listado debe
-		aparecer ordenado por número de asientos en orden descendente.
-		
-		select DISTINCT SAL.codsala, SAL.tipo_sonido, SAL.numfilas, SAL.numasiporfilas
-		from SALAS SAL, PASES PAS, PELICULAS PEL
-		where SAL.codsala = PAS.codsala
-		AND PEL.codpelicula = PAS.codpelicula
-		AND PEL.genero in ('COMEDIA', 'TERROR')
-		AND PEL.fecha_prod >= '2009-01-01'
-		order by numasiporfilas * numfilas DESC
+		 * 4. Obtener la información de todos las salas de cine en las que se haya
+		 * proyectado alguna película de género TERROR o COMEDIA y cuya fecha de
+		 * producción haya sido posterior a 2008. El listado debe aparecer ordenado por
+		 * número de asientos en orden descendente.
+		 * 
+		 * select DISTINCT SAL.codsala, SAL.tipo_sonido, SAL.numfilas,
+		 * SAL.numasiporfilas from SALAS SAL, PASES PAS, PELICULAS PEL where SAL.codsala
+		 * = PAS.codsala AND PEL.codpelicula = PAS.codpelicula AND PEL.genero in
+		 * ('COMEDIA', 'TERROR') AND PEL.fecha_prod >= '2009-01-01' order by
+		 * numasiporfilas * numfilas DESC
 		 */
 //		System.out.println("*******************");
 //		System.out.println("*** Ejercicio 4 ***");
@@ -93,19 +89,16 @@ public class Test2 {
 //		System.out.println("CodSala: " + obj[0] + ", Tipo de Sonido: " +  obj[1] 
 //				+ ", Número de filas" +  obj[2] + ", Número de asientos por filas: " + obj[3]);
 //		}
-		
-		
+
 //		System.out.println("*******************");
 //		System.out.println("*** Ejercicio 5 ***");
 //		System.out.println("*******************");
 		/*
-			select PEL.codpelicula, PEL.titulo, PEL.fecha_prod, PEL.genero
-			from PELICULAS PEL, SALAS SAL, PASES PAS
-			where PEL.codpelicula = PAS.codpelicula
-			and SAL.codsala = PAS.codsala    
-			and SAL.tipo_sonido = 'DOLBY';
+		 * select PEL.codpelicula, PEL.titulo, PEL.fecha_prod, PEL.genero from PELICULAS
+		 * PEL, SALAS SAL, PASES PAS where PEL.codpelicula = PAS.codpelicula and
+		 * SAL.codsala = PAS.codsala and SAL.tipo_sonido = 'DOLBY';
 		 */
-		
+
 //		TypedQuery<Pelicula> query = emanager.createQuery(
 //				"select pel " + 
 //				"from Pelicula pel, Sala sal, Pas pas " + 
@@ -117,21 +110,15 @@ public class Test2 {
 //		System.out.println("CodPelicula: " + obj.getCodpelicula() + ", Título: " +  obj.getTitulo() 
 //				+ ", Fecha producción: " +  obj.getFechaProd() + ", Género: " + obj.getGenero());
 //		}
-		
-		
+
 //		System.out.println("*******************");
 //		System.out.println("*** Ejercicio 6 ***");
 //		System.out.println("*******************");
 		/*
-			select * 
-			from PELICULAS
-			where codpelicula in
-								(select codpelicula
-			                    from PASES
-			                    group by codpelicula
-			                    having count(codpelicula) > 5);
+		 * select * from PELICULAS where codpelicula in (select codpelicula from PASES
+		 * group by codpelicula having count(codpelicula) > 5);
 		 */
-		
+
 //		TypedQuery<Pelicula> query = emanager.createQuery(
 //				"select pel " + 
 //				"from Pelicula pel " + 
@@ -145,22 +132,19 @@ public class Test2 {
 //		System.out.println("CodPelicula: " + obj.getCodpelicula() + ", Título: " +  obj.getTitulo() 
 //				+ ", Fecha producción: " +  obj.getFechaProd() + ", Género: " + obj.getGenero());
 //		}
-		
 
 //		System.out.println("*******************");
 //		System.out.println("*** Ejercicio 7 ***");
 //		System.out.println("*******************");
 		/*
-			7. Obtener un listado con la recaudación total de las salas de cine agrupada 
-			por tipo de pase durante el mes de junio de 2006. 
-			
-			select tipo_pase, codsala, sum(pvp) "recaudación"
-			from ENTRADAS ENT, PASES PAS
-			where ENT.codpase = PAS.codpase
-			and fecha_pase between '2006-06-01' AND '2006-06-30'
-			group by PAS.codpase, codsala
+		 * 7. Obtener un listado con la recaudación total de las salas de cine agrupada
+		 * por tipo de pase durante el mes de junio de 2006.
+		 * 
+		 * select tipo_pase, codsala, sum(pvp) "recaudación" from ENTRADAS ENT, PASES
+		 * PAS where ENT.codpase = PAS.codpase and fecha_pase between '2006-06-01' AND
+		 * '2006-06-30' group by PAS.codpase, codsala
 		 */
-		
+
 //		TypedQuery<Object[]> query = emanager.createQuery(
 //				"select pas.tipoPase, pas.sala.codsala, sum(ent.pvp) " + 
 //				"from Entrada ent, Pas pas " + 
@@ -177,27 +161,39 @@ public class Test2 {
 //			System.out.println("Tipo de pase: " + obj[0] + ", Código de sala: " +
 //				obj[1] + ", Recaudación: " +  obj[2]);
 //		}
-	
-	System.out.println("*******************");
-	System.out.println("*** Ejercicio 8 ***");
-	System.out.println("*******************");
-	
-	/*8. Mostrar un listado con la información de todas las películas proyectadas
-	en salas de más de 100 asientos y con una venta de entradas de al menos el 
-	50% del total del aforo de la sala. 
 
-	select * from SALAS where numfilas * numasiporfilas > 100
-	and
-	codsala in (
-	SELECT codsala
-	FROM
-	(select subtabla.aforo, subtabla.codsala, SAL.numfilas * SAL.numasiporfilas "aforoTotal"
-	FROM
-	(select count(codpase) "aforo", codsala from PASES group by codsala) as subtabla,
-	SALAS SAL
-	WHERE SAL.codsala = subtabla.codsala) subtabla1
-	WHERE aforo > aforoTotal / 2)
-	*/
-	
+		System.out.println("*******************");
+		System.out.println("*** Ejercicio 8 ***");
+		System.out.println("*******************");
+
+		/*
+			 * 8. Mostrar un listado con la información de todas las películas proyectadas
+			 * en salas de más de 100 asientos y con una venta de entradas de al menos el
+			 * 50% del total del aforo de la sala.
+			 * 
+			 * select * from PELICULAS where codpelicula in
+			 * 
+			 * (select pas.codpelicula from ENTRADAS ent, PASES pas, SALAS sal where
+			 * ent.codpase = pas.codpase and sal.codsala = pas.codsala group by codpelicula,
+			 * sal.numasiporfilas, sal.numfilas having count(pas.codpelicula) >
+			 * numasiporfilas * sal.numfilas / 12)
+		 */
+
+
+		TypedQuery<Pelicula> query = emanager.createQuery("select pel from Pelicula pel "
+				+ "where pel.codpelicula in "
+				+ "(select pas.pelicula.codpelicula "
+				+ "from Pas pas, Entrada ent, Sala sal "
+				+ "where ent.pas.codpase = pas.codpase "
+				+ "and sal.codsala = pas.sala.codsala "
+				+ "group by pas.pelicula.codpelicula, sal.numasiporfilas, sal.numfilas "
+				+ "having count(pas.pelicula.codpelicula) > sal.numasiporfilas * sal.numfilas / 2)"
+				, Pelicula.class);
+		List<Pelicula> resultList = query.getResultList();
+
+		for (Pelicula pelicula : resultList) {
+			System.out.println("Código película: " + pelicula.getCodpelicula() + ", Título: " + pelicula.getTitulo()
+					+ ", Fecha producción: " + pelicula.getFechaProd() + ", Género: " + pelicula.getGenero());
+		}
 	}
 }
