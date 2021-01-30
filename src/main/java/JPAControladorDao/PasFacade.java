@@ -1,10 +1,9 @@
 package JPAControladorDao;
-
-
-
+import java.util.List;
 
 import entidades.Pas;
 
 public interface PasFacade extends AbstractFacadeJPA<Pas>{
-	 Long salaPorGenero();
+	 
+	public List<Object[]> recaudacionPorPaseJunio2006();
 }
