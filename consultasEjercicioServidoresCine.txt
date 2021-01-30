@@ -13,6 +13,26 @@ and ENT.codpase = PAS.codpase
 group by PAS.codpase
 
 3. Mostrar cuántas salas distintas existen, donde se proyectan películas de un género determinado. 
+select distinct sal.codsala, sal.tipo_sonido, sal.numfilas, sal.numasiporfilas
+from SALAS sal, PASES pas, PELICULAS pel
+where pas.codpelicula = pel.codpelicula
+and pas.codsala = sal.codsala
+and genero = 'COMEDIA'
+group by sal.codsala, pel.genero
+
+		TypedQuery<Sala> query = emanager.createQuery(
+				"select distinct sal "
+				+ "from Sala sal, Pas pas, Pelicula pel "
+				+ "where pas.pelicula.codpelicula = pel.codpelicula "
+				+ "and pas.sala.codsala = sal.codsala and genero = 'COMEDIA' "
+				+ "group by sal.codsala, pel.genero", Sala.class);
+		List<Sala> resultList4 = query.getResultList();
+		for (Sala obj : resultList4) {
+		System.out.println(
+				"CodSala: " + obj.getCodsala() + ", Tipo de Sonido: " + obj.getTipoSonido() + ", Número de filas"
+						+ obj.getNumfilas() + ", Número de asientos por filas: " + obj.getNumasiporfilas());
+	}
+
 
 
 4. Obtener la información de todos las salas de cine en las que se haya proyectado alguna película de
