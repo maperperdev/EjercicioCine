@@ -302,8 +302,11 @@ public class Test2 {
 		 * Consulta SQL
 		 * 
 		 * select * from PELICULAS where codpelicula in (select pas.codpelicula from
-		 * ENTRADAS ent, PASES pas, SALAS sal where ent.codpase = pas.codpase and
-		 * sal.codsala = pas.codsala group by codpelicula, sal.numasiporfilas,
+		 * ENTRADAS ent, PASES pas, SALAS sal 
+		 * where ent.codpase = pas.codpase
+		 * and sal.codsala = pas.codsala 
+		 * and sal.numfilas * sal.numasiporfilas > 100
+		 * group by codpelicula, sal.numasiporfilas,
 		 * sal.numfilas having count(pas.codpelicula) > numasiporfilas * sal.numfilas
 		 * /2)
 		 */
@@ -316,6 +319,7 @@ public class Test2 {
 //				"select pel from Pelicula pel " + "where pel.codpelicula in " + "(select pas.pelicula.codpelicula "
 //						+ "from Pas pas, Entrada ent, Sala sal " + "where ent.pas.codpase = pas.codpase "
 //						+ "and sal.codsala = pas.sala.codsala "
+//						+ "and sal.numfilas * sal.numasiporfilas > 100 "
 //						+ "group by pas.pelicula.codpelicula, sal.numasiporfilas, sal.numfilas "
 //						+ "having count(pas.pelicula.codpelicula) > sal.numasiporfilas * sal.numfilas / 2)",
 //				Pelicula.class);
